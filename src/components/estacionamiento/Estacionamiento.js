@@ -12,16 +12,17 @@ const Estacionamiento = () => {
     {marca: 'nissan', modelo: 1995, color: 'negro'},
     {marca: 'toyota', modelo: 2020, color: 'rojo'},
     {marca: 'ford', modelo: 2022, color: 'azul'},
+    {marca: 'volkwagen', modelo: 2022, color: 'negro'},
   ];
   const autoMenorA = anio => {
     console.log('autoMenorA');
     console.log(anio);
-    const autosMenores = [];
-    for (let i = 0; i < autos.length; i++) {
-      if (autos[i].modelo < anio) {
-        autosMenores.push(autos[i]);
-      }
-    }
+    const autosMenores = autos.filter(auto => auto.modelo < anio);
+    // for (let i = 0; i < autos.length; i++) {
+    //   if (autos[i].modelo < anio) {
+    //     autosMenores.push(autos[i]);
+    //   }
+    // }
     console.log(autosMenores);
     return (
       <View>
