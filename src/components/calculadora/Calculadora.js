@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
+import Boton from './Boton';
 
 const Calculadora = () => {
   // los estados nos sirven para repintar cada vez que lo necesitemos ya sea por evento
@@ -18,11 +19,10 @@ const Calculadora = () => {
   const [display, setDisplay] = useState('');
   const [numeroA, setNumeroA] = useState('');
   const [numeroB, setNumeroB] = useState('');
-  const [operacion, setOperacion] = useState('+');
+  const [operacion, setOperacion] = useState('');
 
   const definirNumero = numeroNuevo => {
-    console.log('definirNumero');
-    if (numeroA === '') {
+    if (operacion === '') {
       setNumeroA(numeroA + numeroNuevo);
       setDisplay(numeroA + numeroNuevo);
     } else {
@@ -33,7 +33,7 @@ const Calculadora = () => {
 
   const definirOperacion = operacion => {
     setOperacion(operacion);
-    setDisplay(numeroA + operacion);
+    setDisplay(display + operacion);
   };
 
   const calcular = () => {
@@ -57,6 +57,7 @@ const Calculadora = () => {
     setNumeroA('');
     setNumeroB('');
     setDisplay('');
+    setOperacion('');
   };
 
   return (
@@ -71,97 +72,33 @@ const Calculadora = () => {
         {/* contenedor  de los botones numericos*/}
         <View>
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(1)}>
-              <Text style={{color: 'white', fontSize: 24}}>1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(2)}>
-              <Text style={{color: 'white', fontSize: 24}}>2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(3)}>
-              <Text style={{color: 'white', fontSize: 24}}>3</Text>
-            </TouchableOpacity>
+            <Boton text={1} onPress={() => definirNumero(1)} />
+            <Boton text={2} onPress={() => definirNumero(2)} />
+            <Boton text={3} onPress={() => definirNumero(3)} />
           </View>
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(4)}>
-              <Text style={{color: 'white', fontSize: 24}}>4</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(5)}>
-              <Text style={{color: 'white', fontSize: 24}}>5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(6)}>
-              <Text style={{color: 'white', fontSize: 24}}>6</Text>
-            </TouchableOpacity>
+            <Boton text={4} onPress={() => definirNumero(4)} />
+            <Boton text={5} onPress={() => definirNumero(5)} />
+            <Boton text={6} onPress={() => definirNumero(6)} />
           </View>
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(7)}>
-              <Text style={{color: 'white', fontSize: 24}}>7</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(8)}>
-              <Text style={{color: 'white', fontSize: 24}}>8</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(9)}>
-              <Text style={{color: 'white', fontSize: 24}}>9</Text>
-            </TouchableOpacity>
+            <Boton text={7} onPress={() => definirNumero(7)} />
+            <Boton text={8} onPress={() => definirNumero(8)} />
+            <Boton text={9} onPress={() => definirNumero(9)} />
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => limpiar()}>
-              <Text style={{color: 'white', fontSize: 24}}>AC</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => definirNumero(0)}>
-              <Text style={{color: 'white', fontSize: 24}}>0</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.botonNumerico}
-              onPress={() => calcular()}>
-              <Text style={{color: 'white', fontSize: 24}}>=</Text>
-            </TouchableOpacity>
+            <Boton text={'AC'} onPress={() => limpiar()} />
+            <Boton text={0} onPress={() => definirNumero(0)} />
+            <Boton text={'='} onPress={() => calcular()} />
           </View>
         </View>
         {/* de las operaciones  */}
         <View>
-          <TouchableOpacity
-            style={styles.botonNumerico}
-            onPress={() => definirOperacion('+')}>
-            <Text style={{color: 'white', fontSize: 24}}>+</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.botonNumerico}
-            onPress={() => definirOperacion('-')}>
-            <Text style={{color: 'white', fontSize: 24}}>-</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.botonNumerico}
-            onPress={() => definirOperacion('*')}>
-            <Text style={{color: 'white', fontSize: 24}}>*</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.botonNumerico}
-            onPress={() => definirOperacion('/')}>
-            <Text style={{color: 'white', fontSize: 24}}>/</Text>
-          </TouchableOpacity>
+          <Boton text={'+'} onPress={() => definirOperacion('+')} />
+          <Boton text={'-'} onPress={() => definirOperacion('-')} />
+          <Boton text={'*'} onPress={() => definirOperacion('*')} />
+          <Boton text={'/'} onPress={() => definirOperacion('/')} />
         </View>
       </View>
     </View>
@@ -187,23 +124,13 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 5,
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    paddingRight: 10,
+    alignItems: 'flex-start',
+    paddingHorizontal: 10,
   },
   containerBotones: {
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-around',
-  },
-  botonNumerico: {
-    height: 80,
-    width: 60,
-    color: 'blue',
-    backgroundColor: '#841584',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    margin: 5,
   },
 });
 //1. hacer el numero del display este a la izqueirda, intercambiar los botones numericos, por los botones de operacion

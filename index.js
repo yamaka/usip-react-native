@@ -10,4 +10,4 @@ import Verduras from './src/components/verduras/Verduras';
 import Estacionamiento from './src/components/estacionamiento/Estacionamiento';
 import Calculadora from './src/components/calculadora/Calculadora';
 
-AppRegistry.registerComponent(appName, () => Calculadora);
+AppRegistry.registerComponent(appName, () => App);
