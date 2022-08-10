@@ -13,6 +13,8 @@ import AvatarScreen from './src/screens/AvatarScreen';
 import CursosScreen from './src/screens/CursosScreen';
 import DetalleCursoScreen from './src/screens/DetalleCursoScreen';
 import CarritoScreen from './src/screens/CarritoScreen';
+import LoginScreen from './src/screens/auth/LoginScreen';
+import SignupScreen from './src/screens/auth/SignupScreen';
 //icons
 import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -80,8 +82,16 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
+        name="Carrito"
+        component={CarritoScreen}
+        options={{
+          drawerLabel: 'Cursos',
+          drawerIcon: props => <MaterialComunityIcons name="cart" {...props} />,
+        }}
+      />
+      <Drawer.Screen
         name="Usuario"
-        component={TabNavigator}
+        component={ProfileScreen}
         options={{
           drawerLabel: 'Usuario',
           drawerIcon: props => (
@@ -93,10 +103,33 @@ const DrawerNavigator = () => {
   );
 };
 
+const AuthStack = createNativeStackNavigator();
+const AuthSctackNavigator = () => {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AuthStack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </AuthStack.Navigator>
+  );
+};
+
 const App = () => {
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+      {/* <DrawerNavigator /> */}
+      <AuthSctackNavigator />
     </NavigationContainer>
   );
 };
