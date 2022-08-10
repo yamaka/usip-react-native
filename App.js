@@ -1,21 +1,102 @@
+import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import {StyleSheet, Text, Button, View} from 'react-native';
+//react-navigation-libraries
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+//screens
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import AvatarScreen from './src/screens/AvatarScreen';
+import CursosScreen from './src/screens/CursosScreen';
+import DetalleCursoScreen from './src/screens/DetalleCursoScreen';
+import CarritoScreen from './src/screens/CarritoScreen';
+//icons
+import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Stack = createNativeStackNavigator();
+const CursosStack = createNativeStackNavigator();
+const CursosStackNavigator = () => {
+  return (
+    <CursosStack.Navigator>
+      <CursosStack.Screen name="Cursos" component={CursosScreen} />
+      <CursosStack.Screen name="DetalleCurso" component={DetalleCursoScreen} />
+    </CursosStack.Navigator>
+  );
+};
+
+const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Cursos"
+        options={{
+          tabBarLabel: 'CURSOS',
+          tabBarIcon: ({color, size}) => (
+            <MaterialComunityIcons name="home" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
+        component={CursosStackNavigator}
+      />
+      <Tab.Screen
+        name="Carrito"
+        options={{
+          tabBarLabel: 'CARRITO',
+          tabBarIcon: ({color, size}) => (
+            <MaterialComunityIcons name="cart" color={color} size={size} />
+          ),
+        }}
+        component={CarritoScreen}
+      />
+      <Tab.Screen
+        name="Usuario"
+        options={{
+          tabBarLabel: 'PERFIL',
+          tabBarIcon: ({color, size}) => (
+            <MaterialComunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+        component={ProfileScreen}
+      />
+    </Tab.Navigator>
+  );
+};
+
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen
+        name="Home"
+        component={TabNavigator}
+        options={{
+          drawerLabel: 'Cursos',
+          drawerIcon: props => <MaterialComunityIcons name="home" {...props} />,
+        }}
+      />
+      <Drawer.Screen
+        name="Usuario"
+        component={TabNavigator}
+        options={{
+          drawerLabel: 'Usuario',
+          drawerIcon: props => (
+            <MaterialComunityIcons name="account" {...props} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="Avatar" component={AvatarScreen} />
-      </Stack.Navigator>
+      <DrawerNavigator />
     </NavigationContainer>
   );
 };

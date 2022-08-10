@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View, Button} from 'react-native';
 import React from 'react';
 
-const HomeScreen = ({navigation}) => {
+const CursosScreen = ({navigation}) => {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
+      <Text>Cursos Screen</Text>
       <Button
-        title="Go to Profile"
+        title="Go to Curso"
         onPress={() =>
-          navigation.navigate('Profile', {
+          navigation.navigate('DetalleCurso', {
             nombre: 'pablo',
             correo: 'pablin@gamil.com',
           })
@@ -18,10 +18,6 @@ const HomeScreen = ({navigation}) => {
   );
 };
 
-export default HomeScreen;
+export default CursosScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
-});
+const styles = StyleSheet.create({});
